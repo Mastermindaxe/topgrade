@@ -5,7 +5,7 @@ use crate::utils::{require_option, REQUIRE_SUDO};
 use color_eyre::eyre::Result;
 
 pub fn upgrade_openbsd(ctx: &ExecutionContext) -> Result<()> {
-    let sudo = require_option(ctx.sudo().as_ref(), REQUIRE_SUDO.to_string())?;
+    let sudo = require_option(ctx.sudo().as_ref(), get_require_sudo_string())?;
     print_separator(t!("OpenBSD Update"));
     ctx.run_type()
         .execute(sudo)
@@ -14,7 +14,7 @@ pub fn upgrade_openbsd(ctx: &ExecutionContext) -> Result<()> {
 }
 
 pub fn upgrade_packages(ctx: &ExecutionContext) -> Result<()> {
-    let sudo = require_option(ctx.sudo().as_ref(), REQUIRE_SUDO.to_string())?;
+    let sudo = require_option(ctx.sudo().as_ref(), get_require_sudo_string())?;
     print_separator(t!("OpenBSD Packages"));
 
     if ctx.config().cleanup() {

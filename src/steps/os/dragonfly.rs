@@ -7,7 +7,7 @@ use color_eyre::eyre::Result;
 use std::process::Command;
 
 pub fn upgrade_packages(ctx: &ExecutionContext) -> Result<()> {
-    let sudo = require_option(ctx.sudo().as_ref(), REQUIRE_SUDO.to_string())?;
+    let sudo = require_option(ctx.sudo().as_ref(), get_require_sudo_string())?;
     print_separator(t!("DragonFly BSD Packages"));
     let mut cmd = ctx.run_type().execute(sudo);
     cmd.args(["/usr/local/sbin/pkg", "upgrade"]);
@@ -18,7 +18,7 @@ pub fn upgrade_packages(ctx: &ExecutionContext) -> Result<()> {
 }
 
 pub fn audit_packages(ctx: &ExecutionContext) -> Result<()> {
-    let sudo = require_option(ctx.sudo().as_ref(), REQUIRE_SUDO.to_string())?;
+    let sudo = require_option(ctx.sudo().as_ref(), get_require_sudo_string())?;
 
     print_separator(t!("DragonFly BSD Audit"));
 

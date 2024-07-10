@@ -25,7 +25,7 @@ use crate::executor::Executor;
 #[cfg(any(target_os = "linux", target_os = "macos"))]
 use crate::executor::RunType;
 use crate::terminal::print_separator;
-use crate::utils::{require, require_option, PathExt, REQUIRE_SUDO};
+use crate::utils::{require, require_option, PathExt, get_require_sudo_string};
 
 #[cfg(any(target_os = "linux", target_os = "macos"))]
 const INTEL_BREW: &str = "/usr/local/bin/brew";
@@ -178,7 +178,7 @@ pub fn run_oh_my_fish(ctx: &ExecutionContext) -> Result<()> {
 
 pub fn run_pkgin(ctx: &ExecutionContext) -> Result<()> {
     let pkgin = require("pkgin")?;
-    let sudo = require_option(ctx.sudo().as_ref(), REQUIRE_SUDO.to_string())?;
+    let sudo = require_option(ctx.sudo().as_ref(), get_require_sudo_string())?;
 
     print_separator("Pkgin");
 

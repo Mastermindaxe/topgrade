@@ -164,7 +164,7 @@ mod test {
     }
 
     #[test]
-    #[should_panic(expected = "Version numbers can not be all 0s")] // TODO: Problems with i18n?
+    #[should_panic(expected = "Version numbers can not be all 0s")]
     fn invalid_version() {
         let all_0 = "0.0.0";
         all_0.parse::<Version>().unwrap();

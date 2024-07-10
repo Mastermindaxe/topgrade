@@ -4,7 +4,7 @@ use std::os::unix::fs::MetadataExt;
 use std::path::PathBuf;
 use std::process::Command;
 
-use crate::utils::{require_option, REQUIRE_SUDO};
+use crate::utils::{require_option, get_require_sudo_string};
 use crate::HOME_DIR;
 use color_eyre::eyre::Result;
 #[cfg(target_os = "linux")]
@@ -93,7 +93,7 @@ impl NPM {
     fn upgrade(&self, ctx: &ExecutionContext, use_sudo: bool) -> Result<()> {
         let args = ["update", self.global_location_arg()];
         if use_sudo {
-            let sudo = require_option(ctx.sudo().clone(), REQUIRE_SUDO.to_string())?;
+            let sudo = require_option(ctx.sudo().clone(), get_require_sudo_string())?;
             ctx.run_type()
                 .execute(sudo)
                 .arg(&self.command)
@@ -157,7 +157,7 @@ impl Yarn {
         let args = ["global", "upgrade"];
 
         if use_sudo {
-            let sudo = require_option(ctx.sudo().clone(), REQUIRE_SUDO.to_string())?;
+            let sudo = require_option(ctx.sudo().clone(), get_require_sudo_string())?;
             ctx.run_type()
                 .execute(sudo)
                 .arg(self.yarn.as_ref().unwrap_or(&self.command))

@@ -17,7 +17,7 @@ use crate::command::{CommandExt, Utf8Output};
 use crate::execution_context::ExecutionContext;
 use crate::executor::ExecutorOutput;
 use crate::terminal::{print_separator, shell};
-use crate::utils::{self, check_is_python_2_or_shim, require, require_option, which, PathExt, REQUIRE_SUDO};
+use crate::utils::{self, check_is_python_2_or_shim, require, require_option, which, PathExt, get_require_sudo_string};
 use crate::Step;
 use crate::HOME_DIR;
 use crate::{
@@ -130,7 +130,7 @@ pub fn run_rubygems(ctx: &ExecutionContext) -> Result<()> {
             .args(["update", "--system"])
             .status_checked()?;
     } else {
-        let sudo = require_option(ctx.sudo().as_ref(), REQUIRE_SUDO.to_string())?;
+        let sudo = require_option(ctx.sudo().as_ref(), get_require_sudo_string())?;
         if !Path::new("/usr/lib/ruby/vendor_ruby/rubygems/defaults/operating_system.rb").exists() {
             ctx.run_type()
                 .execute(sudo)
@@ -159,7 +159,7 @@ pub fn run_haxelib_update(ctx: &ExecutionContext) -> Result<()> {
     let mut command = if directory_writable {
         ctx.run_type().execute(&haxelib)
     } else {
-        let sudo = require_option(ctx.sudo().as_ref(), REQUIRE_SUDO.to_string())?;
+        let sudo = require_option(ctx.sudo().as_ref(), get_require_sudo_string())?;
         let mut c = ctx.run_type().execute(sudo);
         c.arg(&haxelib);
         c
@@ -350,7 +350,7 @@ pub fn run_vcpkg_update(ctx: &ExecutionContext) -> Result<()> {
     let mut command = if is_root_install {
         ctx.run_type().execute(&vcpkg)
     } else {
-        let sudo = require_option(ctx.sudo().as_ref(), REQUIRE_SUDO.to_string())?;
+        let sudo = require_option(ctx.sudo().as_ref(), get_require_sudo_string())?;
         let mut c = ctx.run_type().execute(sudo);
         c.arg(&vcpkg);
         c
@@ -652,7 +652,7 @@ pub fn run_tlmgr_update(ctx: &ExecutionContext) -> Result<()> {
     let mut command = if directory_writable {
         ctx.run_type().execute(&tlmgr)
     } else {
-        let sudo = require_option(ctx.sudo().as_ref(), REQUIRE_SUDO.to_string())?;
+        let sudo = require_option(ctx.sudo().as_ref(), get_require_sudo_string())?;
         let mut c = ctx.run_type().execute(sudo);
         c.arg(&tlmgr);
         c
@@ -736,7 +736,7 @@ pub fn run_composer_update(ctx: &ExecutionContext) -> Result<()> {
                 };
 
                 if has_update {
-                    let sudo = require_option(ctx.sudo().as_ref(), REQUIRE_SUDO.to_string())?;
+                    let sudo = require_option(ctx.sudo().as_ref(), get_require_sudo_string())?;
                     ctx.run_type()
                         .execute(sudo)
                         .arg(&composer)
@@ -947,7 +947,7 @@ pub fn run_bob(ctx: &ExecutionContext) -> Result<()> {
 }
 
 pub fn run_certbot(ctx: &ExecutionContext) -> Result<()> {
-    let sudo = require_option(ctx.sudo().as_ref(), REQUIRE_SUDO.to_string())?;
+    let sudo = require_option(ctx.sudo().as_ref(), get_require_sudo_string())?;
     let certbot = require("certbot")?;
 
     print_separator("Certbot");

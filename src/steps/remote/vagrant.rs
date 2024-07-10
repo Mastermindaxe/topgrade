@@ -230,7 +230,6 @@ pub fn upgrade_vagrant_boxes(ctx: &ExecutionContext) -> Result<()> {
         .args(["box", "outdated", "--global"])
         .output_checked_utf8()?;
 
-    // TODO: How to handle this with i18n in mind?
     let re = Regex::new(r"\* '(.*?)' for '(.*?)' is outdated").unwrap();
 
     let mut found = false;

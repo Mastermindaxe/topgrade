@@ -41,7 +41,7 @@ pub fn self_update(ctx: &ExecutionContext) -> Result<()> {
         if let UpdateStatus::Updated(release) = &result {
             println!("{}", t!("Topgrade upgraded to {version}:\n", version = release.version));
             if let Some(body) = &release.body {
-                println!("{body}"); // TODO: Any way to translate what I think are the release notes?
+                println!("{body}");
             }
         } else {
             println!("{}", t!("Topgrade is up-to-date"));

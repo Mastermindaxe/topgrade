@@ -101,7 +101,7 @@ fn run() -> Result<()> {
     };
 
     if opt.show_config_reference() {
-        print!("{}", config::EXAMPLE_CONFIG); // TODO: Find a way to use a translated example config
+        print!("{}", config::EXAMPLE_CONFIG);
         return Ok(());
     }
 

@@ -1,7 +1,7 @@
 use crate::command::CommandExt;
 use crate::execution_context::ExecutionContext;
 use crate::terminal::{print_separator, prompt_yesno};
-use crate::utils::{require_option, REQUIRE_SUDO};
+use crate::utils::{require_option, get_require_sudo_string};
 use crate::{utils::require, Step};
 use color_eyre::eyre::Result;
 use rust_i18n::t;
@@ -12,7 +12,7 @@ use tracing::debug;
 
 pub fn run_macports(ctx: &ExecutionContext) -> Result<()> {
     require("port")?;
-    let sudo = require_option(ctx.sudo().as_ref(), REQUIRE_SUDO.to_string())?;
+    let sudo = require_option(ctx.sudo().as_ref(), get_require_sudo_string())?;
 
     print_separator("MacPorts");
     ctx.run_type()

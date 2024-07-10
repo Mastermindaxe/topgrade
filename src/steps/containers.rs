@@ -19,7 +19,7 @@ use crate::{execution_context::ExecutionContext, utils::require};
 // that cannot be pulled, likely because they don't exist in the registry in
 // the first place. This happens e.g. when the user tags an image locally
 // themselves or when using docker-compose.
-// TODO: Add i18n
+// i18n: This will not be translated as this string is used to query the actual output of docker
 const NONEXISTENT_REPO: &str = "repository does not exist";
 
 /// Uniquely identifies a `Container`.
@@ -69,10 +69,13 @@ fn list_containers(crt: &Path, ignored_containers: Option<&Vec<String>>) -> Resu
             .collect::<Vec<WildMatch>>()
     });
 
-    // TODO: Add i18n
     debug!(
-        "Querying '{} image ls --format \"{{{{.Repository}}}}:{{{{.Tag}}}}/{{{{.ID}}}}\"' for containers",
-        crt.display()
+        "{}",
+        t!(
+            "Querying '{path} {command}' for containers",
+            path = crt.display(),
+            command = "image ls --format \"{{{{.Repository}}}}:{{{{.Tag}}}}/{{{{.ID}}}}\""
+        )
     );
     let output = Command::new(crt)
         .args(["image", "ls", "--format", "{{.Repository}}:{{.Tag}} {{.ID}}"])
@@ -114,11 +117,14 @@ fn list_containers(crt: &Path, ignored_containers: Option<&Vec<String>>) -> Resu
             }
         }
 
-        // TODO: Add i18n
         debug!(
-            "Querying '{} image inspect --format \"{{{{.Os}}}}/{{{{.Architecture}}}}\"' for container {}",
-            crt.display(),
-            image_id
+            "{}",
+            t!(
+                "Querying '{path} {command}' for container {container}",
+                path = crt.display(),
+                command = "image inspect --format \"{{{{.Os}}}}/{{{{.Architecture}}}}\"",
+                container = image_id
+            )
         );
         let inspect_output = Command::new(crt)
             .args(["image", "inspect", image_id, "--format", "{{.Os}}/{{.Architecture}}"])

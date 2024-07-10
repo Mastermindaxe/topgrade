@@ -26,6 +26,7 @@ use crate::sudo::SudoKind;
 use crate::utils::string_prepend_str;
 use tracing::{debug, error};
 
+// TODO: Add i18n to this. Tracking issue: https://github.com/topgrade-rs/topgrade/issues/859
 pub static EXAMPLE_CONFIG: &str = include_str!("../config.example.toml");
 
 /// Topgrade's default log level.
@@ -716,7 +717,6 @@ impl ConfigFile {
             .context(t!("Failed to open configuration file editor"))
     }
 
-    // TODO: Add all occurrences of "[misc]" to internationalization
     /// [Misc] was added later, here we check if it is present in the config file and add it if not
     fn ensure_misc_is_present(contents: &mut String, path: &PathBuf) {
         if !contents.contains("[misc]") {
@@ -732,6 +732,7 @@ impl ConfigFile {
 
 // Command line arguments
 // TODO: i18n of clap currently not easily possible. Waiting for https://github.com/clap-rs/clap/issues/380
+// Tracking issue for i18n: https://github.com/topgrade-rs/topgrade/issues/859
 #[derive(Parser, Debug)]
 #[command(name = "topgrade", version)]
 pub struct CommandLineArgs {

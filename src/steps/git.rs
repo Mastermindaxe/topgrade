@@ -333,7 +333,6 @@ impl RepoStep {
         let before_revision = get_head_revision(&self.git, &repo);
 
         if ctx.config().verbose() {
-            // TODO: Properly use i18n in this one. How to deal with the colors?
             println!("{} {}", style(t!("Pulling")).cyan().bold(), repo.as_ref().display());
         }
 
@@ -360,7 +359,6 @@ impl RepoStep {
             .wrap_err_with(|| format!("{}", t!("Failed to pull {repo}", repo = repo.as_ref().display())));
 
         if result.is_err() {
-            // TODO: Properly use i18n in this one. How to deal with the colors?
             println!(
                 "{} {} {}",
                 style(t!("Failed")).red().bold(),
@@ -372,7 +370,6 @@ impl RepoStep {
 
             match (&before_revision, &after_revision) {
                 (Some(before), Some(after)) if before != after => {
-                    // TODO: Properly use i18n in this one. How to deal with the colors?
                     println!("{} {}", style(t!("Changed")).yellow().bold(), repo.as_ref().display());
 
                     Command::new(&self.git)
@@ -390,7 +387,6 @@ impl RepoStep {
                 }
                 _ => {
                     if ctx.config().verbose() {
-                        // TODO: Properly use i18n in this one. How to deal with the colors?
                         println!("{} {}", style(t!("Up-to-date")).green().bold(), repo.as_ref().display());
                     }
                 }
@@ -415,7 +411,6 @@ impl RepoStep {
         }
 
         if !ctx.config().verbose() {
-            // TODO: Properly use i18n in this one. How to deal with the colors?
             println!(
                 "\n{} {}\n",
                 style(t!("Only")).green().bold(),
@@ -428,7 +423,6 @@ impl RepoStep {
             .iter()
             .filter(|repo| match self.has_remotes(repo) {
                 Some(false) => {
-                    // TODO: Properly use i18n in this one. How to deal with the colors?
                     println!(
                         "{} {} {}",
                         style(t!("Skipping")).yellow().bold(),
