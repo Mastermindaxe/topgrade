@@ -12,7 +12,7 @@ use crate::execution_context::ExecutionContext;
 use crate::steps::generic::is_wsl;
 use crate::steps::os::archlinux;
 use crate::terminal::{print_separator, prompt_yesno};
-use crate::utils::{require, require_option, which, PathExt, get_require_sudo_string};
+use crate::utils::{get_require_sudo_string, require, require_option, which, PathExt};
 use crate::{Step, HOME_DIR};
 
 static OS_RELEASE_PATH: &str = "/etc/os-release";

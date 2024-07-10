@@ -25,7 +25,7 @@ use crate::executor::Executor;
 #[cfg(any(target_os = "linux", target_os = "macos"))]
 use crate::executor::RunType;
 use crate::terminal::print_separator;
-use crate::utils::{require, require_option, PathExt, get_require_sudo_string};
+use crate::utils::{get_require_sudo_string, require, require_option, PathExt};
 
 #[cfg(any(target_os = "linux", target_os = "macos"))]
 const INTEL_BREW: &str = "/usr/local/bin/brew";

@@ -1,7 +1,7 @@
 use crate::command::CommandExt;
 use crate::execution_context::ExecutionContext;
 use crate::terminal::print_separator;
-use crate::utils::{require_option, get_require_sudo_string};
+use crate::utils::{get_require_sudo_string, require_option};
 use color_eyre::eyre::Result;
 
 pub fn upgrade_openbsd(ctx: &ExecutionContext) -> Result<()> {

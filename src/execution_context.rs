@@ -1,7 +1,7 @@
 #![allow(dead_code)]
 use crate::executor::RunType;
 use crate::sudo::Sudo;
-use crate::utils::{require_option, get_require_sudo_string};
+use crate::utils::{get_require_sudo_string, require_option};
 use crate::{config::Config, executor::Executor};
 use color_eyre::eyre::Result;
 use std::env::var;

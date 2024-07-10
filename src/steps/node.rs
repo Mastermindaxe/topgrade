@@ -4,7 +4,7 @@ use std::os::unix::fs::MetadataExt;
 use std::path::PathBuf;
 use std::process::Command;
 
-use crate::utils::{require_option, get_require_sudo_string};
+use crate::utils::{get_require_sudo_string, require_option};
 use crate::HOME_DIR;
 use color_eyre::eyre::Result;
 #[cfg(target_os = "linux")]
