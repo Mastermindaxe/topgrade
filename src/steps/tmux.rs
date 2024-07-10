@@ -41,7 +41,7 @@ struct Tmux {
 impl Tmux {
     fn new(args: Vec<String>) -> Self {
         Self {
-            tmux: which("tmux").expect(t!("Could not find tmux").as_ref()),
+            tmux: which("tmux").unwrap_or_else(|| { panic!("{}", t!("Could not find tmux").as_ref().to_string()) }),
             args: if args.is_empty() { None } else { Some(args) },
         }
     }

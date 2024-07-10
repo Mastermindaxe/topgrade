@@ -256,9 +256,9 @@ pub fn check_is_python_2_or_shim(python: PathBuf) -> Result<PathBuf> {
         let major_version = version
             .split('.')
             .next()
-            .expect(t!("Should have a major version number").as_ref())
+            .unwrap_or_else(|| { panic!("{}", t!("Should have a major version number").as_ref().to_string()) })
             .parse::<u32>()
-            .expect(t!("Major version should be a valid number").as_ref());
+            .unwrap_or_else(|_| { panic!("{}", t!("Major version should be a valid number").as_ref().to_string()) });
         if major_version == 2 {
             return Err(SkipStep(t!("{python} is a Python 2, skip.", python = python.display()).to_string()).into());
         }

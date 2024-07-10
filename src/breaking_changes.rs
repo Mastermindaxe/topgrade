@@ -104,7 +104,7 @@ pub(crate) fn should_skip() -> bool {
 
 /// True if this is the first execution of a major release.
 pub(crate) fn first_run_of_major_release() -> Result<bool> {
-    let version = VERSION_STR.parse::<Version>().expect(&*t!("should be a valid version"));
+    let version = VERSION_STR.parse::<Version>().expect(&t!("should be a valid version"));
     let keep_file = keep_file_path();
 
     // disable this lint here as the current code has better readability

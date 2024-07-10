@@ -48,9 +48,9 @@ mod sudo;
 mod terminal;
 mod utils;
 
-pub(crate) static HOME_DIR: Lazy<PathBuf> = Lazy::new(|| home::home_dir().expect(&*t!("No home directory")));
+pub(crate) static HOME_DIR: Lazy<PathBuf> = Lazy::new(|| home::home_dir().expect(&t!("No home directory")));
 #[cfg(unix)]
-pub(crate) static XDG_DIRS: Lazy<Xdg> = Lazy::new(|| Xdg::new().expect(&*t!("No home directory")));
+pub(crate) static XDG_DIRS: Lazy<Xdg> = Lazy::new(|| Xdg::new().expect(&t!("No home directory")));
 
 #[cfg(windows)]
 pub(crate) static WINDOWS_DIRS: Lazy<Windows> = Lazy::new(|| Windows::new().expect("No home directory"));
