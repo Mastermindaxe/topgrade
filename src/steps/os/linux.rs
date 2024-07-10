@@ -1067,7 +1067,14 @@ pub fn run_waydroid(ctx: &ExecutionContext) -> Result<()> {
         .stdout
         .lines()
         .find(|line| line.contains("Session:"))
-        .expect(t!("the output of `waydroid status` should contain `Session:`").as_ref());
+        .unwrap_or_else(|| {
+            panic!(
+                "{}",
+                t!("the output of `waydroid status` should contain `Session:`")
+                    .as_ref()
+                    .to_string()
+            )
+        });
     let is_container_running = session.contains("RUNNING");
     let assume_yes = ctx.config().yes(Step::Waydroid);
 

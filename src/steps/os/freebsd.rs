@@ -4,6 +4,7 @@ use crate::terminal::print_separator;
 use crate::utils::{get_require_sudo_string, require_option};
 use crate::Step;
 use color_eyre::eyre::Result;
+use rust_i18n::t;
 use std::process::Command;
 
 pub fn upgrade_freebsd(ctx: &ExecutionContext) -> Result<()> {
