@@ -2548,6 +2548,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "sys-locale"
+version = "0.3.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e801cf239ecd6ccd71f03d270d67dd53d13e90aab208bf4b8fe4ad957ea949b0"
+dependencies = [
+ "libc",
+]
+
+[[package]]
 name = "tar"
 version = "0.4.41"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2790,6 +2799,7 @@ dependencies = [
  "shell-words",
  "shellexpand",
  "strum",
+ "sys-locale",
  "tempfile",
  "thiserror",
  "tokio",

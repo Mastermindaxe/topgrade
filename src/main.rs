@@ -55,7 +55,7 @@ pub(crate) static XDG_DIRS: Lazy<Xdg> = Lazy::new(|| Xdg::new().expect(&*t!("No 
 #[cfg(windows)]
 pub(crate) static WINDOWS_DIRS: Lazy<Windows> = Lazy::new(|| Windows::new().expect("No home directory"));
 
-// Initialization of the i18n crate
+// Init and load the i18n files
 i18n!("locales", fallback = "en");
 
 fn run() -> Result<()> {
@@ -75,6 +75,17 @@ fn run() -> Result<()> {
     // For more info, see the comments in `CommandLineArgs::tracing_filter_directives()`
     // and `Config::tracing_filter_directives()`.
     let reload_handle = install_tracing(&opt.tracing_filter_directives())?;
+
+    // Get current system locale and set it as the default locale
+    let system_locale = sys_locale::get_locale().unwrap_or("en".to_string());
+    rust_i18n::set_locale(&system_locale);
+    debug!(
+        "{}",
+        t!(
+            "Current system locale is {system_locale}",
+            system_locale = system_locale
+        )
+    );
 
     if let Some(shell) = opt.gen_completion {
         let cmd = &mut CommandLineArgs::command();

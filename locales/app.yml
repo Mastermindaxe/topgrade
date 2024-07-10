@@ -1,5 +1,7 @@
 _version: 2
-
+  
+"Current system locale is {system_locale}":
+  en: "Current system locale is %{system_locale}"
 "Dry running: {program_name} {shell_words}":
   en: "Dry running: %{program_name} %{shell_words}"
 "in {directory}":

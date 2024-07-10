@@ -997,7 +997,7 @@ pub fn run_lensfun_update_data(ctx: &ExecutionContext) -> Result<()> {
     const EXIT_CODE_WHEN_NO_UPDATE: i32 = 1;
 
     if ctx.config().lensfun_use_sudo() {
-        let sudo = require_option(ctx.sudo().as_ref(), REQUIRE_SUDO.to_string())?;
+        let sudo = require_option(ctx.sudo().as_ref(), get_require_sudo_string().to_string())?;
         print_separator(SEPARATOR);
         ctx.run_type()
             .execute(sudo)
