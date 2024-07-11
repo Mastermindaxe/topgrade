@@ -47,8 +47,8 @@ impl Drop for SelfRenamer {
                 "{}",
                 t!(
                     "Moved Topgrade back from {temp_path} to {exe_path}",
-                    temp_path = format!("{temp_path:?}"),
-                    exe_path = format!("{exe_path:?}")
+                    temp_path = format!("{:?}", &self.temp_path),
+                    exe_path = format!("{:?}", &self.exe_path)
                 )
             ),
             Err(e) => error!(
