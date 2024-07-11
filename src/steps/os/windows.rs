@@ -11,6 +11,7 @@ use crate::terminal::{print_separator, print_warning};
 use crate::utils::{require, which};
 use crate::{error::SkipStep, steps::git::RepoStep};
 use crate::{powershell, Step};
+use rust_i18n::t;
 
 pub fn run_chocolatey(ctx: &ExecutionContext) -> Result<()> {
     let choco = require("choco")?;

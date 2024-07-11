@@ -95,7 +95,7 @@ impl Powershell {
 
     #[cfg(windows)]
     pub fn windows_update(&self, ctx: &ExecutionContext) -> Result<()> {
-        let powershell = require_option(self.path.as_ref(), t!("Powershell is not installed"))?;
+        let powershell = require_option(self.path.as_ref(), t!("Powershell is not installed").to_string())?;
 
         debug_assert!(self.supports_windows_update());
 

@@ -1,4 +1,5 @@
 use color_eyre::eyre::Result;
+use rust_i18n::t;
 use std::{env::current_exe, fs, path::PathBuf};
 use tracing::{debug, error};
 
