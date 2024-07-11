@@ -18,6 +18,6 @@ extern "system" fn handler(ctrl_type: DWORD) -> BOOL {
 
 pub fn set_handler() {
     if 0 == unsafe { SetConsoleCtrlHandler(Some(handler), TRUE) } {
-        error!(t!("Cannot set a control C handler"))
+        error!("{}", t!("Cannot set a control C handler"))
     }
 }
